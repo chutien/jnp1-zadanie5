@@ -1,0 +1,10 @@
+#ifndef JNP1_ZADANIE5_DECORATION_H
+#define JNP1_ZADANIE5_DECORATION_H
+
+
+class Decoration {
+
+};
+
+
+#endif //JNP1_ZADANIE5_DECORATION_H
