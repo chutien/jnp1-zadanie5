@@ -16,7 +16,7 @@ class Adult : public Person {
 public:
     Adult(std::string& name, Price savings);
 
-    void buyDecoration(Decoration decoration);
+//    void buyDecoration(Decoration decoration);
     Price getSavings();
 };
 

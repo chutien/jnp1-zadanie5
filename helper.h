@@ -6,8 +6,11 @@
 int randomNumber();
 
 class Price {
+private:
+    int value;
+
 public:
-    Price(int n = 0);
+    explicit Price(int n);
 
     Price operator+(const Price& other) const;
     bool operator<(const Price& other) const;
@@ -18,6 +21,8 @@ public:
 };
 
 class Date {
+    int totalMinutes;
+
 public:
     Date(int day, int hour, int minute);
 
@@ -27,7 +32,7 @@ public:
     bool operator<(const Date& other);
 
     // format: December, 20, 13:04
-    friend std::ostream& operator<<(std::ostream& os, const Price& price);
+    friend std::ostream& operator<<(std::ostream& os, const Date& Date);
 };
 
 // Funkcja currentDate zwracająca bieżący czas symulacji. Symulacja zaczyna się
