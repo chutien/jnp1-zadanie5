@@ -6,6 +6,10 @@
 #include "decoration.h"
 
 class Person {
+protected:
+    Person() = default;
+    std::string name;
+
 public:
     std::string getName();
 };
@@ -22,7 +26,7 @@ public:
 
 class Child : public Person {
 public:
-    Child(std::string& name) {}
+    explicit Child(std::string& name) {}
 };
 
 

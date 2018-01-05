@@ -10,7 +10,7 @@ private:
     int value;
 
 public:
-    explicit Price(int n);
+    explicit Price(int n = 0);
 
     Price operator+(const Price& other) const;
     bool operator<(const Price& other) const;
@@ -37,5 +37,6 @@ public:
 
 // Funkcja currentDate zwracająca bieżący czas symulacji. Symulacja zaczyna się
 // 18.12.2017 o godzinie 16:00 i kończy 24.12.2017 o godzinie 18:00.
+// w sumie to troche nie rozumiem, czy ta obecna data ma się jakoś zmieniać?
 Date currentDate();
 #endif //JNP1_ZADANIE5_HELPER_H

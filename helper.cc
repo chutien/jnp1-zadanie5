@@ -1,13 +1,15 @@
 #include <iomanip>
+#include <random>
 #include "helper.h"
 
 namespace {
     int HOURS = 24;
     int MINUTES = 60;
-
+    std::mersenne_twister_engine mte(0);
+    std::uniform_int_distribution<int> uid(0, std::numeric_limits<int>::max());
 }
 
-Price::Price(int n = 0) : value(n){}
+Price::Price(int n) : value(n){}
 
 Price Price::operator+(const Price &other) const {
     return Price(value + other.value);
@@ -50,6 +52,10 @@ std::ostream &operator<<(std::ostream &os, const Date &date) {
         << date.totalMinutes%(HOURS*MINUTES) / MINUTES << ":" << std::setw(2)
         << date.totalMinutes%MINUTES;
     return os;
+}
+
+int randomNumber() {
+    return uid(mte);
 }
 
 

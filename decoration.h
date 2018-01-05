@@ -9,7 +9,7 @@ class Decoration {
 public:
     virtual std::string getName() = 0; // nie wiem, czy to też może być virtualne, jeśli christmas tree nie ma tego w specyfikacji :0
     virtual Price getPrice() = 0;
-    virtual void doOperation() = 0;
+    virtual void doOperation(std::ostream &os) = 0;
 };
 
 
@@ -18,7 +18,7 @@ class ChristmasTree : public Decoration {
 public:
     class iterator;
 
-    void doOperation();
+    void doOperation(std::ostream &os) override;
     Price getPrice();
     //void addDecoration(); // przez shared poiner??
     // void removeDecoration // przez iterator
@@ -32,15 +32,26 @@ public:
 
 // Leafs
 class GlassBall : public Decoration {
+private:
+    bool isBroken = false;
 
+public:
+    void doOperation(std::ostream &os) override;
 };
 
 class Lights : public Decoration {
+private:
+    int currentState = 0;
+    static std::string states[] = { "off", "constant", "blinking" };
 
+public:
+    void doOperation(std::ostream &os) override;
 };
 
 class Tree : public Decoration {
 
+public:
+    void doOperation(std::ostream &os) override;
 };
 
 #endif //JNP1_ZADANIE5_DECORATION_H
