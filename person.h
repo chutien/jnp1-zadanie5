@@ -1,6 +1,7 @@
-#ifndef JNP1_ZADANIE5_PERSON_H
-#define JNP1_ZADANIE5_PERSON_H
+#ifndef JNP1_ZADANIE6_PERSON_H
+#define JNP1_ZADANIE6_PERSON_H
 
+#include <bits/shared_ptr.h>
 #include <string>
 #include "helper.h"
 #include "decoration.h"
@@ -11,17 +12,19 @@ protected:
     std::string name;
 
 public:
-    std::string getName();
+    std::string getName() const;
+    virtual void update() = 0;
 };
 
 class Adult : public Person {
+private:
     Price savings;
 
 public:
     Adult(std::string& name, Price savings);
 
-//    void buyDecoration(Decoration decoration);
-    Price getSavings();
+    void buyDecoration(const std::shared_ptr<Decoration> &decoration);
+    Price getSavings() const;
 };
 
 class Child : public Person {
@@ -30,4 +33,4 @@ public:
 };
 
 
-#endif //JNP1_ZADANIE5_PERSON_H
+#endif //JNP1_ZADANIE6_PERSON_H

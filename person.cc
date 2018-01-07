@@ -1,14 +1,22 @@
 #include "person.h"
 
+// Person
+std::string Person::getName() const {
+    return name;
+}
+
+// Adult
 Adult::Adult(std::string &name, Price savings = Price())
         : name(name), savings(savings) {}
 
-Price Adult::getSavings() {
-    return Price();
+void Adult::buyDecoration(const std::shared_ptr<Decoration> &decoration) {
+
 }
 
-std::string Person::getName() {
-    return name;
+Price Adult::getSavings() {
+    return savings;
 }
+
+
 
 Child::Child(std::string &name) : name(name) {}

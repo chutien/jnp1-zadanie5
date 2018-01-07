@@ -1,5 +1,5 @@
-#ifndef JNP1_ZADANIE5_HELPER_H
-#define JNP1_ZADANIE5_HELPER_H
+#ifndef JNP1_ZADANIE6_HELPER_H
+#define JNP1_ZADANIE6_HELPER_H
 
 #include <iostream>
 
@@ -28,15 +28,20 @@ public:
 
     // + 1 minuta
     Date& operator++();
-    int operator-(const Date& other);
-    bool operator<(const Date& other);
+    int operator-(const Date& other) const;
+    bool operator<(const Date& other) const;
 
     // format: December, 20, 13:04
     friend std::ostream& operator<<(std::ostream& os, const Date& Date);
 };
 
-// Funkcja currentDate zwracająca bieżący czas symulacji. Symulacja zaczyna się
+// Julia: Funkcja currentDate zwracająca bieżący czas symulacji. Symulacja zaczyna się
 // 18.12.2017 o godzinie 16:00 i kończy 24.12.2017 o godzinie 18:00.
 // w sumie to troche nie rozumiem, czy ta obecna data ma się jakoś zmieniać?
-Date currentDate();
-#endif //JNP1_ZADANIE5_HELPER_H
+// Tien: W przykładzie jest auto& czyli chyba zmiana czasu jest symulowana przez pętle i odbywa się przez referencję.
+Date& currentDate() {
+    static Date currentDate(18, 16, 00);
+    return currentDate;
+}
+
+#endif //JNP1_ZADANIE6_HELPER_H

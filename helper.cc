@@ -38,11 +38,11 @@ Date &Date::operator++() {
     return *this;
 }
 
-int Date::operator-(const Date &other) {
+int Date::operator-(const Date &other) const {
     return totalMinutes - other.totalMinutes;
 }
 
-bool Date::operator<(const Date &other) {
+bool Date::operator<(const Date &other) const {
     return totalMinutes < other.totalMinutes;
 }
 
