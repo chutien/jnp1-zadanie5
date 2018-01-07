@@ -1,19 +1,23 @@
 #ifndef JNP1_ZADANIE6_PERSON_H
 #define JNP1_ZADANIE6_PERSON_H
 
-#include <bits/shared_ptr.h>
+#include <memory>
 #include <string>
 #include "helper.h"
-#include "decoration.h"
+
+class Decoration;
+class ChristmasTree;
 
 class Person {
 protected:
-    Person() = default;
-    std::string name;
+    const std::string name;
+
+    explicit Person(const std::string &);
 
 public:
+    Person() = delete;
     std::string getName() const;
-    virtual void update() = 0;
+    virtual void update(ChristmasTree &) const = 0;
 };
 
 class Adult : public Person {
@@ -23,13 +27,16 @@ private:
 public:
     Adult(std::string& name, Price savings);
 
-    void buyDecoration(const std::shared_ptr<Decoration> &decoration);
+    void buyDecoration(std::shared_ptr<Decoration> decoration);
     Price getSavings() const;
+    void update(ChristmasTree &) const override;
 };
 
 class Child : public Person {
 public:
-    explicit Child(std::string& name) {}
+    explicit Child(std::string &name);
+
+    void update(ChristmasTree &) const override;
 };
 
 

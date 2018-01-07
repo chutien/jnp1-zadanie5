@@ -1,11 +1,12 @@
+#include "helper.h"
 #include <iomanip>
 #include <random>
-#include "helper.h"
 
 namespace {
     int HOURS = 24;
     int MINUTES = 60;
-    std::mersenne_twister_engine mte(0);
+    //std::mersenne_twister_engine mte(0);
+    std::mt19937 mte(0);
     std::uniform_int_distribution<int> uid(0, std::numeric_limits<int>::max());
 }
 
@@ -56,6 +57,11 @@ std::ostream &operator<<(std::ostream &os, const Date &date) {
 
 int randomNumber() {
     return uid(mte);
+}
+
+Date& currentDate() {
+    static Date currentDate(18, 16, 00);
+    return currentDate;
 }
 
 

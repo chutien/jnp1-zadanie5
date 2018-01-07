@@ -3,16 +3,18 @@
 
 #include <string>
 #include <list>
-#include <bits/shared_ptr.h>
+#include <memory>
 #include "helper.h"
-#include "person.h"
+
+class Person;
 
 // Component
 class Decoration {
 protected:
     const std::string name;
+    explicit Decoration(const std::string &);
+
 public:
-    Decoration(const std::string &);
     // Julia: nie wiem, czy to też może być virtualne, jeśli christmas tree nie ma tego w specyfikacji :0
     // Tien: skoro i tak chcemy miec pure metody do chyba nie ma sensu trzymac getName w abstract klasie, gdy i tak w leafs trzeba ja przepisac.
     // Tien: zauwazylem, ze w tresci konstruktor christmasTree wywolany jest z parametrem string
@@ -22,7 +24,7 @@ public:
 };
 
 
-// Composite
+// Composite, Observable
 class ChristmasTree : public Decoration {
 private:
     std::list<std::shared_ptr<Decoration>> decorations;
@@ -65,7 +67,7 @@ class Lights : public Decoration {
 private:
     const Price price;
     int currentState = 0;
-    static std::string states[] = { "off", "constant", "blinking" };
+    static std::string states[3];
 
 public:
     Lights() = delete;

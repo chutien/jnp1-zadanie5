@@ -39,9 +39,6 @@ public:
 // 18.12.2017 o godzinie 16:00 i kończy 24.12.2017 o godzinie 18:00.
 // w sumie to troche nie rozumiem, czy ta obecna data ma się jakoś zmieniać?
 // Tien: W przykładzie jest auto& czyli chyba zmiana czasu jest symulowana przez pętle i odbywa się przez referencję.
-Date& currentDate() {
-    static Date currentDate(18, 16, 00);
-    return currentDate;
-}
+Date& currentDate();
 
 #endif //JNP1_ZADANIE6_HELPER_H
