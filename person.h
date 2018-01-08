@@ -12,7 +12,7 @@ class Person {
 protected:
     const std::string name;
 
-    explicit Person(std::string);
+    explicit Person(const std::string&);
 
 public:
     Person() = delete;
@@ -26,7 +26,7 @@ private:
 
 public:
     //Adult(std::string);
-    Adult(std::string name, Price savings = Price());
+    Adult(const std::string& name, Price savings = Price());
 
     void buyDecoration(Decoration& decoration);
     Price getSavings() const;
@@ -35,7 +35,7 @@ public:
 
 class Child : public Person {
 public:
-    explicit Child(std::string name);
+    explicit Child(const std::string& name);
 
     void update(ChristmasTree &) const override;
 };

@@ -45,11 +45,11 @@ public:
     Price getPrice() const override;
     void doOperation(std::ostream &os) override;
     //void addDecoration(); // przez shared poiner??
-    void addDecoration(std::shared_ptr<Decoration>); //value czy &
+    void addDecoration(const std::shared_ptr<Decoration>&); //value czy &
     void removeDecoration(decIterator); // przez iterator
     decIterator begin();
     decIterator end();
-    void attachObserver(std::shared_ptr<Person>); // przez shared pointer
+    void attachObserver(const std::shared_ptr<Person>&); // przez shared pointer
     void detachObserver(obsIterator); // J: przez iterator?? how? T: xd
     void notify(); // informuje o zmianach stanu
 };

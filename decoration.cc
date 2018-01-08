@@ -27,13 +27,13 @@ void ChristmasTree::doOperation(std::ostream &os) {
     }
 }
 
-void ChristmasTree::addDecoration(std::shared_ptr<Decoration> decoration) {
-    decorations.push_front(std::move(decoration));
+void ChristmasTree::addDecoration(const std::shared_ptr<Decoration>& decoration) {
+    decorations.push_front(decoration);
     notify();
 }
 
-void ChristmasTree::attachObserver(std::shared_ptr<Person> observer) {
-    observers.push_back(std::move(observer));
+void ChristmasTree::attachObserver(const std::shared_ptr<Person>& observer) {
+    observers.push_back(observer);
 }
 
 void ChristmasTree::notify() {

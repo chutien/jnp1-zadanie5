@@ -2,13 +2,14 @@
 #include "decoration.h"
 
 // Person
-Person::Person(std::string name) : name(name) {}
+Person::Person(const std::string& name) : name(name) {}
+
 std::string Person::getName() const {
     return name;
 }
 
 // Adult
-Adult::Adult(std::string name, Price savings)
+Adult::Adult(const std::string& name, Price savings)
         : Person(name), savings(savings) {}
 
 void Adult::update(ChristmasTree &christmasTree) const {
@@ -25,7 +26,7 @@ Price Adult::getSavings() const {
 }
 
 //Child
-Child::Child(std::string name) : Person(name) {}
+Child::Child(const std::string& name) : Person(name) {}
 
 void Child::update(ChristmasTree &christmasTree) const {
     std::cout << "Wow!" << std::endl;
