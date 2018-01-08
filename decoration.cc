@@ -89,7 +89,7 @@ Price Tree::getPrice() const {
 }
 
 void Tree::doOperation(std::ostream &os) {
-    int diff = cutDate - currentDate();
-    double needlesPercentage = 2 / (1 + std::exp(diff / 8640));
+    int diff = currentDate() - cutDate;
+    double needlesPercentage = 100.0 * 2 / (1.0 + std::exp(diff / 8640.0));
     os << getName() << ": " << needlesPercentage << "% of tree covered with needles" << std::endl;
 }

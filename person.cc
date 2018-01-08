@@ -14,7 +14,7 @@ Adult::Adult(const std::string& name, Price savings)
 
 void Adult::update(ChristmasTree &christmasTree) const {
     std::cout << "We have new decoration!" << std::endl;
-    std::cout << "Total cost is " << christmasTree.getPrice() << std::endl;
+    std::cout << "Total cost is " << christmasTree.getPrice() << "." << std::endl;
 }
 
 void Adult::buyDecoration(Decoration& decoration) {
@@ -30,5 +30,5 @@ Child::Child(const std::string& name) : Person(name) {}
 
 void Child::update(ChristmasTree &christmasTree) const {
     std::cout << "Wow!" << std::endl;
-    //(*christmasTree.begin())->doOperation(std::cout);
+    (*christmasTree.begin())->doOperation(std::cout);
 }

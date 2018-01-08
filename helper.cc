@@ -49,8 +49,9 @@ bool Date::operator<(const Date &other) const {
 
 std::ostream &operator<<(std::ostream &os, const Date &date) {
     os << "December, "  << std::setfill('0') << std::setw(2)
-        << date.totalMinutes/MINUTES/HOURS << ", " << std::setw(2)
-        << date.totalMinutes%(HOURS*MINUTES) / MINUTES << ":" << std::setw(2)
+        << date.totalMinutes/MINUTES/HOURS << ", "
+        << date.totalMinutes%(HOURS*MINUTES) / MINUTES << ":"
+        << std::setfill('0') << std::setw(2)
         << date.totalMinutes%MINUTES;
     return os;
 }
