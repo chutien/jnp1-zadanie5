@@ -28,12 +28,14 @@ void ChristmasTree::doOperation(std::ostream &os) {
 }
 
 void ChristmasTree::addDecoration(const std::shared_ptr<Decoration>& decoration) {
-    decorations.push_front(decoration);
+    decorations.push_back(decoration);
     notify();
 }
 
-void ChristmasTree::attachObserver(const std::shared_ptr<Person>& observer) {
+ChristmasTree::obsIterator ChristmasTree::attachObserver(
+    const std::shared_ptr<Person> &observer) {
     observers.push_back(observer);
+    return --observers.end();
 }
 
 void ChristmasTree::notify() {
@@ -48,6 +50,10 @@ ChristmasTree::decIterator ChristmasTree::begin() {
 
 ChristmasTree::decIterator ChristmasTree::end() {
     return decorations.end();
+}
+
+void ChristmasTree::detachObserver(ChristmasTree::obsIterator obsIterator) {
+    observers.erase(obsIterator);
 }
 
 // GlassBall

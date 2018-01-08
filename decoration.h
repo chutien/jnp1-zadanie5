@@ -29,27 +29,28 @@ class ChristmasTree : public Decoration {
 protected:
     using decElem = std::shared_ptr<Decoration>;
     using decList = std::list<decElem>;
+    using obsElem = std::shared_ptr<Person>;
+    using obsList = std::list<obsElem>;
 
 private:
     decList decorations;
-    std::list<std::shared_ptr<Person>> observers;
+    obsList observers;
 
 public:
     using decIterator = decList::iterator;
-
-    class obsIterator;
+    using obsIterator = obsList::iterator;
 
     ChristmasTree() = delete;
-    ChristmasTree(const std::string &);
+
+    explicit ChristmasTree(const std::string &);
 
     Price getPrice() const override;
     void doOperation(std::ostream &os) override;
-    //void addDecoration(); // przez shared poiner??
-    void addDecoration(const std::shared_ptr<Decoration>&); //value czy &
+    void addDecoration(const std::shared_ptr<Decoration>&);
     void removeDecoration(decIterator); // przez iterator
     decIterator begin();
     decIterator end();
-    void attachObserver(const std::shared_ptr<Person>&); // przez shared pointer
+    obsIterator attachObserver(const std::shared_ptr<Person> &); // przez shared pointer
     void detachObserver(obsIterator); // J: przez iterator?? how? T: xd
     void notify(); // informuje o zmianach stanu
 };

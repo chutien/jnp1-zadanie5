@@ -30,5 +30,5 @@ Child::Child(const std::string& name) : Person(name) {}
 
 void Child::update(ChristmasTree &christmasTree) const {
     std::cout << "Wow!" << std::endl;
-    (*christmasTree.begin())->doOperation(std::cout);
+    (*--christmasTree.end())->doOperation(std::cout);
 }
