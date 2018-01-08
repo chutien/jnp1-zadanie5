@@ -26,12 +26,17 @@ public:
 
 // Composite, Observable
 class ChristmasTree : public Decoration {
+protected:
+    using decElem = std::shared_ptr<Decoration>;
+    using decList = std::list<decElem>;
+
 private:
-    std::list<std::shared_ptr<Decoration>> decorations;
+    decList decorations;
     std::list<std::shared_ptr<Person>> observers;
 
 public:
-    class decIterator;
+    using decIterator = decList::iterator;
+
     class obsIterator;
 
     ChristmasTree() = delete;

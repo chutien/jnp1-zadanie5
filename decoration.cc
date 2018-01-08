@@ -42,6 +42,14 @@ void ChristmasTree::notify() {
     }
 }
 
+ChristmasTree::decIterator ChristmasTree::begin() {
+    return decorations.begin();
+}
+
+ChristmasTree::decIterator ChristmasTree::end() {
+    return decorations.end();
+}
+
 // GlassBall
 GlassBall::GlassBall(const std::string &name, const Price &price) :
         Decoration(name), price(price) {}
