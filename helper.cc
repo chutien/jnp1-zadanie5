@@ -5,9 +5,6 @@
 namespace {
     int HOURS = 24;
     int MINUTES = 60;
-    //std::mersenne_twister_engine mte(0);
-    std::mt19937 mte(0);
-    std::uniform_int_distribution<int> uid(0, std::numeric_limits<int>::max());
 }
 
 Price::Price(int n) : value(n){}
@@ -57,6 +54,8 @@ std::ostream &operator<<(std::ostream &os, const Date &date) {
 }
 
 int randomNumber() {
+    static std::mt19937 mte(0);
+    static std::uniform_int_distribution<int> uid(0, std::numeric_limits<int>::max());
     return uid(mte);
 }
 
@@ -66,4 +65,18 @@ Date& currentDate() {
 }
 
 
+Observable::obsIterator
+Observable::attachObserver(const std::shared_ptr<Observer> &observer) {
+    observers.push_back(observer);
+    return --observers.end();
+}
 
+void Observable::detachObserver(Observable::obsIterator it) {
+    observers.erase(it);
+}
+
+void Observable::notify() {
+    for (auto &observer : observers) {
+        observer->update(*this);
+    }
+}

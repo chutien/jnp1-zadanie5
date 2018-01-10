@@ -4,11 +4,10 @@
 #include <memory>
 #include <string>
 #include "helper.h"
+#include "decoration.h"
 
-class Decoration;
-class ChristmasTree;
 
-class Person {
+class Person : public Observer {
 protected:
     const std::string name;
 
@@ -17,7 +16,6 @@ protected:
 public:
     Person() = delete;
     std::string getName() const;
-    virtual void update(ChristmasTree &) const = 0;
 };
 
 class Adult : public Person {
@@ -25,19 +23,18 @@ private:
     Price savings;
 
 public:
-    //Adult(std::string);
-    Adult(const std::string& name, Price savings = Price());
+    explicit Adult(const std::string& name, Price savings = Price());
 
     void buyDecoration(Decoration& decoration);
     Price getSavings() const;
-    void update(ChristmasTree &) const override;
+    void update(Observable &) const override;
 };
 
 class Child : public Person {
 public:
     explicit Child(const std::string& name);
 
-    void update(ChristmasTree &) const override;
+    void update(Observable &) const override;
 };
 
 

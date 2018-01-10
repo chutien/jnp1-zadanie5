@@ -12,9 +12,9 @@ std::string Person::getName() const {
 Adult::Adult(const std::string& name, Price savings)
         : Person(name), savings(savings) {}
 
-void Adult::update(ChristmasTree &christmasTree) const {
+void Adult::update(Observable &observable) const {
     std::cout << "We have new decoration!" << std::endl;
-    std::cout << "Total cost is " << christmasTree.getPrice() << "." << std::endl;
+    std::cout << "Total cost is " << observable.getPrice() << "." << std::endl;
 }
 
 void Adult::buyDecoration(Decoration& decoration) {
@@ -28,7 +28,7 @@ Price Adult::getSavings() const {
 //Child
 Child::Child(const std::string& name) : Person(name) {}
 
-void Child::update(ChristmasTree &christmasTree) const {
+void Child::update(Observable &observable) const {
     std::cout << "Wow!" << std::endl;
-    (*--christmasTree.end())->doOperation(std::cout);
+    observable.doOperationOnLast(std::cout);
 }

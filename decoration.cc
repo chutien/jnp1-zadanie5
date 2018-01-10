@@ -1,6 +1,4 @@
 #include "decoration.h"
-#include "person.h"
-#include "helper.h"
 #include <cmath>
 
 // Decoration
@@ -32,18 +30,6 @@ void ChristmasTree::addDecoration(const std::shared_ptr<Decoration>& decoration)
     notify();
 }
 
-ChristmasTree::obsIterator ChristmasTree::attachObserver(
-    const std::shared_ptr<Person> &observer) {
-    observers.push_back(observer);
-    return --observers.end();
-}
-
-void ChristmasTree::notify() {
-    for (auto &observer : observers) {
-        observer->update(*this);
-    }
-}
-
 ChristmasTree::decIterator ChristmasTree::begin() {
     return decorations.begin();
 }
@@ -52,8 +38,12 @@ ChristmasTree::decIterator ChristmasTree::end() {
     return decorations.end();
 }
 
-void ChristmasTree::detachObserver(ChristmasTree::obsIterator obsIterator) {
-    observers.erase(obsIterator);
+void ChristmasTree::removeDecoration(ChristmasTree::decIterator it) {
+    decorations.erase(it);
+}
+
+void ChristmasTree::doOperationOnLast(std::ostream &) {
+    decorations.back()->doOperation(std::cout);
 }
 
 // GlassBall
@@ -74,13 +64,12 @@ void GlassBall::doOperation(std::ostream &os) {
 Lights::Lights(const std::string &name, const Price &price) :
         Decoration(name), price(price) {}
 
-std::string Lights::states[] = { "off", "constant", "blinking" };
-
 Price Lights::getPrice() const {
     return price;
 }
 
 void Lights::doOperation(std::ostream &os) {
+    static std::string states[] = { "off", "constant", "blinking" };
     currentState++;
     currentState%=3;
     os << getName() << ": " << states[currentState] << std::endl;

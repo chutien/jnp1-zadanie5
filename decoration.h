@@ -6,8 +6,6 @@
 #include <memory>
 #include "helper.h"
 
-class Person;
-
 // Component
 class Decoration {
 protected:
@@ -15,9 +13,6 @@ protected:
     explicit Decoration(const std::string &);
 
 public:
-    // Julia: nie wiem, czy to też może być virtualne, jeśli christmas tree nie ma tego w specyfikacji :0
-    // Tien: skoro i tak chcemy miec pure metody do chyba nie ma sensu trzymac getName w abstract klasie, gdy i tak w leafs trzeba ja przepisac.
-    // Tien: zauwazylem, ze w tresci konstruktor christmasTree wywolany jest z parametrem string
     std::string getName() const;
     virtual Price getPrice() const = 0;
     virtual void doOperation(std::ostream &os) = 0;
@@ -25,34 +20,29 @@ public:
 
 
 // Composite, Observable
-class ChristmasTree : public Decoration {
+class ChristmasTree : public Decoration, public Observable {
 protected:
     using decElem = std::shared_ptr<Decoration>;
     using decList = std::list<decElem>;
-    using obsElem = std::shared_ptr<Person>;
-    using obsList = std::list<obsElem>;
 
 private:
     decList decorations;
-    obsList observers;
 
 public:
     using decIterator = decList::iterator;
-    using obsIterator = obsList::iterator;
 
     ChristmasTree() = delete;
 
     explicit ChristmasTree(const std::string &);
 
     Price getPrice() const override;
-    void doOperation(std::ostream &os) override;
+    void doOperation(std::ostream &) override;
+    void doOperationOnLast(std::ostream &) override;
     void addDecoration(const std::shared_ptr<Decoration>&);
     void removeDecoration(decIterator); // przez iterator
     decIterator begin();
     decIterator end();
-    obsIterator attachObserver(const std::shared_ptr<Person> &); // przez shared pointer
-    void detachObserver(obsIterator); // J: przez iterator?? how? T: xd
-    void notify(); // informuje o zmianach stanu
+    
 };
 
 // Leafs
@@ -73,7 +63,6 @@ class Lights : public Decoration {
 private:
     const Price price;
     int currentState = 0;
-    static std::string states[3];
 
 public:
     Lights() = delete;

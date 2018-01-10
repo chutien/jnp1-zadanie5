@@ -2,6 +2,8 @@
 #define JNP1_ZADANIE6_HELPER_H
 
 #include <iostream>
+#include <memory>
+#include <list>
 
 int randomNumber();
 
@@ -35,10 +37,29 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Date& Date);
 };
 
-// Julia: Funkcja currentDate zwracająca bieżący czas symulacji. Symulacja zaczyna się
-// 18.12.2017 o godzinie 16:00 i kończy 24.12.2017 o godzinie 18:00.
-// w sumie to troche nie rozumiem, czy ta obecna data ma się jakoś zmieniać?
-// Tien: W przykładzie jest auto& czyli chyba zmiana czasu jest symulowana przez pętle i odbywa się przez referencję.
 Date& currentDate();
+
+class Observer;
+
+class Observable {
+    using obsElem = std::shared_ptr<Observer>;
+    using obsList = std::list<obsElem>;
+    using obsIterator = obsList::iterator;
+
+private:
+    obsList observers;
+
+public:
+    virtual obsIterator attachObserver(const std::shared_ptr<Observer> &);
+    virtual void detachObserver(obsIterator) ; // J: przez iterator?? how? T: xd
+    virtual void notify();
+    virtual void doOperationOnLast(std::ostream &os) = 0;
+    virtual Price getPrice() const = 0;
+};
+
+class Observer {
+public:
+    virtual void update(Observable &) const = 0;
+};
 
 #endif //JNP1_ZADANIE6_HELPER_H
