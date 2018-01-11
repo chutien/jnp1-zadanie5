@@ -11,10 +11,11 @@ class Person : public Observer {
 protected:
     const std::string name;
 
-    explicit Person(const std::string&);
+    explicit Person(const std::string &);
 
 public:
     Person() = delete;
+
     std::string getName() const;
 };
 
@@ -23,16 +24,18 @@ private:
     Price savings;
 
 public:
-    explicit Adult(const std::string& name, Price savings = Price());
+    explicit Adult(const std::string &name, Price savings = Price());
 
-    void buyDecoration(const Decoration& decoration);
+    void buyDecoration(const Decoration &);
+
     Price getSavings() const;
+
     void update(Observable &) const override;
 };
 
 class Child : public Person {
 public:
-    explicit Child(const std::string& name);
+    explicit Child(const std::string &name);
 
     void update(Observable &) const override;
 };

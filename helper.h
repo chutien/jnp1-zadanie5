@@ -14,12 +14,14 @@ private:
 public:
     explicit Price(int n = 0);
 
-    Price operator+(const Price& other) const;
-    bool operator<(const Price& other) const;
-    const Price& operator-=(const Price& other);
+    Price operator+(const Price &) const;
+
+    bool operator<(const Price &) const;
+
+    const Price &operator-=(const Price &);
 
     // format: 1234 PLN
-    friend std::ostream& operator<<(std::ostream& os, const Price& price);
+    friend std::ostream &operator<<(std::ostream &, const Price &);
 };
 
 class Date {
@@ -28,16 +30,17 @@ class Date {
 public:
     Date(int day, int hour, int minute);
 
-    // + 1 minuta
-    Date& operator++();
-    int operator-(const Date& other) const;
-    bool operator<(const Date& other) const;
+    Date &operator++();
+
+    int operator-(const Date &) const;
+
+    bool operator<(const Date &) const;
 
     // format: December, 20, 13:04
-    friend std::ostream& operator<<(std::ostream& os, const Date& Date);
+    friend std::ostream &operator<<(std::ostream &, const Date &);
 };
 
-Date& currentDate();
+Date &currentDate();
 
 class Observer;
 
@@ -51,16 +54,22 @@ private:
 
 public:
     virtual obsIterator attachObserver(const std::shared_ptr<Observer> &);
+
     virtual void detachObserver(obsIterator);
+
     virtual void notify();
-    virtual void doOperationOnLast(std::ostream &os) = 0;
+
+    virtual void doOperationOnLast(std::ostream &) = 0;
+
     virtual Price getPrice() const = 0;
+
     virtual ~Observable() {};
 };
 
 class Observer {
 public:
     virtual void update(Observable &) const = 0;
+
     virtual ~Observer() {};
 };
 

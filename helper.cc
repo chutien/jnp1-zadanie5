@@ -7,7 +7,7 @@ namespace {
     int MINUTES = 60;
 }
 
-Price::Price(int n) : value(n){}
+Price::Price(int n) : value(n) {}
 
 Price Price::operator+(const Price &other) const {
     return Price(value + other.value);
@@ -45,21 +45,22 @@ bool Date::operator<(const Date &other) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Date &date) {
-    os << "December, "  << std::setfill('0') << std::setw(2)
-        << date.totalMinutes/MINUTES/HOURS << ", "
-        << date.totalMinutes%(HOURS*MINUTES) / MINUTES << ":"
-        << std::setfill('0') << std::setw(2)
-        << date.totalMinutes%MINUTES;
+    os << "December, " << std::setfill('0') << std::setw(2)
+       << date.totalMinutes / MINUTES / HOURS << ", "
+       << date.totalMinutes % (HOURS * MINUTES) / MINUTES << ":"
+       << std::setfill('0') << std::setw(2)
+       << date.totalMinutes % MINUTES;
     return os;
 }
 
 int randomNumber() {
     static std::mt19937 mte(0);
-    static std::uniform_int_distribution<int> uid(0, std::numeric_limits<int>::max());
+    static std::uniform_int_distribution<int> uid(0,
+                                                  std::numeric_limits<int>::max());
     return uid(mte);
 }
 
-Date& currentDate() {
+Date &currentDate() {
     static Date currentDate(18, 16, 00);
     return currentDate;
 }

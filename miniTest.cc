@@ -7,10 +7,10 @@
 using namespace std;
 
 int main() {
-    Date d(10, 10, 10);
-    Date d2(31, 23, 59);
-    Date d3(0, 0, 0);
-    cout << d << d2 << d3;
+    // Rodzina Kowalskich...
+    auto John = make_shared<Adult>("Jan", Price(1000));
+    auto Mary = make_shared<Adult>("Marysia");
+    auto Ada = make_shared<Child>("Ada");
 
     // ... chciała mieć świąteczne drzewko...
     ChristmasTree tree("Christmas tree");
