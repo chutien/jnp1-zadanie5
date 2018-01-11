@@ -1,14 +1,11 @@
 #include "person.h"
-#include "decoration.h"
 
-// Person
 Person::Person(const std::string& name) : name(name) {}
 
 std::string Person::getName() const {
     return name;
 }
 
-// Adult
 Adult::Adult(const std::string& name, Price savings)
         : Person(name), savings(savings) {}
 
@@ -17,7 +14,7 @@ void Adult::update(Observable &observable) const {
     std::cout << "Total cost is " << observable.getPrice() << "." << std::endl;
 }
 
-void Adult::buyDecoration(Decoration& decoration) {
+void Adult::buyDecoration(const Decoration& decoration) {
     savings -= decoration.getPrice();
 }
 
@@ -25,7 +22,6 @@ Price Adult::getSavings() const {
     return savings;
 }
 
-//Child
 Child::Child(const std::string& name) : Person(name) {}
 
 void Child::update(Observable &observable) const {

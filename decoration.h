@@ -6,7 +6,6 @@
 #include <memory>
 #include "helper.h"
 
-// Component
 class Decoration {
 protected:
     const std::string name;
@@ -16,10 +15,9 @@ public:
     std::string getName() const;
     virtual Price getPrice() const = 0;
     virtual void doOperation(std::ostream &os) = 0;
+    virtual ~Decoration() {};
 };
 
-
-// Composite, Observable
 class ChristmasTree : public Decoration, public Observable {
 protected:
     using decElem = std::shared_ptr<Decoration>;
@@ -45,43 +43,44 @@ public:
     
 };
 
-// Leafs
-class GlassBall : public Decoration {
-private:
+class DecorationWithPrice : public Decoration {
+protected:
     const Price price;
+    DecorationWithPrice(const std::string &, const Price &);
+public:
+    Price getPrice() const override;
+};
+
+class GlassBall : public DecorationWithPrice {
+private:
     bool isBroken = false;
 
 public:
     GlassBall() = delete;
     GlassBall(const std::string &, const Price &);
 
-    Price getPrice() const override;
     void doOperation(std::ostream &os) override;
 };
 
-class Lights : public Decoration {
+class Lights : public DecorationWithPrice {
 private:
-    const Price price;
     int currentState = 0;
 
 public:
     Lights() = delete;
     Lights(const std::string &, const Price &);
 
-    Price getPrice() const override;
     void doOperation(std::ostream &os) override;
 };
 
-class Tree : public Decoration {
+class Tree : public DecorationWithPrice {
 private:
-    const Price price;
     const Date cutDate;
 
 public:
     Tree() = delete;
     Tree(const std::string &, const Price &, const Date &);
 
-    Price getPrice() const override;
     void doOperation(std::ostream &os) override;
 };
 

@@ -25,7 +25,7 @@ private:
 public:
     explicit Adult(const std::string& name, Price savings = Price());
 
-    void buyDecoration(Decoration& decoration);
+    void buyDecoration(const Decoration& decoration);
     Price getSavings() const;
     void update(Observable &) const override;
 };

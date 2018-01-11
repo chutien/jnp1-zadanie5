@@ -1,14 +1,12 @@
 #include "decoration.h"
 #include <cmath>
 
-// Decoration
 Decoration::Decoration(const std::string &name) : name(name) {}
 
 std::string Decoration::getName() const {
     return name;
 }
 
-// ChristmasTree
 ChristmasTree::ChristmasTree(const std::string &name) : Decoration(name){}
 
 Price ChristmasTree::getPrice() const {
@@ -46,13 +44,15 @@ void ChristmasTree::doOperationOnLast(std::ostream &) {
     decorations.back()->doOperation(std::cout);
 }
 
-// GlassBall
-GlassBall::GlassBall(const std::string &name, const Price &price) :
+DecorationWithPrice::DecorationWithPrice(const std::string &name, const Price &price) :
         Decoration(name), price(price) {}
 
-Price GlassBall::getPrice() const {
+Price DecorationWithPrice::getPrice() const {
     return price;
-}
+};
+
+GlassBall::GlassBall(const std::string &name, const Price &price) :
+        DecorationWithPrice(name, price) {}
 
 void GlassBall::doOperation(std::ostream &os) {
     if (!isBroken && randomNumber()%4 == 0)
@@ -60,13 +60,8 @@ void GlassBall::doOperation(std::ostream &os) {
     os << getName() << ": " << (isBroken ? "broken" : "OK") << std::endl;
 }
 
-// Lights
 Lights::Lights(const std::string &name, const Price &price) :
-        Decoration(name), price(price) {}
-
-Price Lights::getPrice() const {
-    return price;
-}
+        DecorationWithPrice(name, price) {}
 
 void Lights::doOperation(std::ostream &os) {
     static std::string states[] = { "off", "constant", "blinking" };
@@ -75,13 +70,8 @@ void Lights::doOperation(std::ostream &os) {
     os << getName() << ": " << states[currentState] << std::endl;
 }
 
-// Tree
 Tree::Tree(const std::string &name, const Price &price, const Date &cutDate) :
-        Decoration(name), price(price), cutDate(cutDate) {}
-
-Price Tree::getPrice() const {
-    return price;
-}
+        DecorationWithPrice(name, price), cutDate(cutDate) {}
 
 void Tree::doOperation(std::ostream &os) {
     int diff = currentDate() - cutDate;

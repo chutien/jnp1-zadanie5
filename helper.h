@@ -51,15 +51,17 @@ private:
 
 public:
     virtual obsIterator attachObserver(const std::shared_ptr<Observer> &);
-    virtual void detachObserver(obsIterator) ; // J: przez iterator?? how? T: xd
+    virtual void detachObserver(obsIterator);
     virtual void notify();
     virtual void doOperationOnLast(std::ostream &os) = 0;
     virtual Price getPrice() const = 0;
+    virtual ~Observable() {};
 };
 
 class Observer {
 public:
     virtual void update(Observable &) const = 0;
+    virtual ~Observer() {};
 };
 
 #endif //JNP1_ZADANIE6_HELPER_H
